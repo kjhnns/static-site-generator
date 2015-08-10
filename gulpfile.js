@@ -19,7 +19,8 @@ var paths = {
   dist: './dist/',
 
   css: 'css/',
-  js: 'js/'
+  js: 'js/',
+  assets: 'assets/'
 };
 
 // fileinclude: grab partials from templates and render out html files
@@ -72,6 +73,17 @@ gulp.task('uglify', function() {
     }));
 });
 
+//  moving assets files
+//===========================================
+gulp.task('assets', function() {
+  return gulp.src(path.join(paths.source, paths.assets, '*'))
+    .pipe(gulp.dest(path.join(paths.dist, paths.assets)))
+    .pipe(livereload(server))
+    .pipe(notify({
+      message: 'assets'
+    }));
+
+});
 
 
 //  Connect: sever task
@@ -109,6 +121,6 @@ gulp.task('watch', function() {
 
 //  Default Gulp Task
 //===========================================
-gulp.task('default', ['fileinclude', 'sass', 'uglify', 'connect', 'watch'], function() {
+gulp.task('default', ['fileinclude', 'sass', 'uglify', 'assets', 'connect', 'watch'], function() {
 
 });
