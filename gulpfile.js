@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-  gutil = require('gulp-util'),
   sass = require('gulp-sass'),
   uglify = require('gulp-uglify'),
   minifycss = require('gulp-minify-css'),
@@ -9,10 +8,9 @@ var gulp = require('gulp'),
   livereload = require('gulp-livereload'),
   lr = require('tiny-lr'),
   connect = require('gulp-connect'),
-  plumber = require('gulp-plumber'),
   autoprefixer = require('gulp-autoprefixer'),
   server = lr(),
-  path = require("path");
+  path = require('path');
 
 var paths = {
   source: './src/',
@@ -29,10 +27,10 @@ gulp.task('fileinclude', function() {
   return gulp.src(path.join(paths.source, '*.tpl'))
     .pipe(fileinclude())
     .pipe(rename({
-      extname: ""
+      extname: ''
     }))
     .pipe(rename({
-      extname: ".html"
+      extname: '.html'
     }))
     .pipe(gulp.dest(paths.dist))
     .pipe(livereload(server))
@@ -50,8 +48,10 @@ gulp.task('sass', function() {
       sourceComments: 'map',
       errLogToConsole: true
     }))
-    .pipe(minifycss({compatibility: 'ie8'}))
-    .pipe(autoprefixer('last 2 version', "> 1%", 'ie 8', 'ie 9'))
+    .pipe(minifycss({
+      compatibility: 'ie8'
+    }))
+    .pipe(autoprefixer('last 2 version', '> 1%', 'ie 8', 'ie 9'))
     .pipe(gulp.dest(path.join(paths.dist, paths.css)))
     .pipe(livereload(server))
     .pipe(notify({
