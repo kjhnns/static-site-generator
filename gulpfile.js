@@ -2,6 +2,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   sass = require('gulp-sass'),
   uglify = require('gulp-uglify'),
+  minifycss = require('gulp-minify-css'),
   fileinclude = require('gulp-file-include'),
   rename = require('gulp-rename'),
   notify = require('gulp-notify'),
@@ -48,6 +49,7 @@ gulp.task('sass', function() {
       sourceComments: 'map',
       errLogToConsole: true
     }))
+    .pipe(minifycss({compatibility: 'ie8'}))
     .pipe(autoprefixer('last 2 version', "> 1%", 'ie 8', 'ie 9'))
     .pipe(gulp.dest(path.join(paths.dist, paths.css)))
     .pipe(livereload(server))
@@ -69,6 +71,7 @@ gulp.task('uglify', function() {
       message: 'uglify'
     }));
 });
+
 
 
 //  Connect: sever task
