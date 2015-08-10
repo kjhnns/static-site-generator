@@ -1,0 +1,9 @@
+.DS_Store
+.project
+.nodemonignore
+.sass-cache
+.bower-*
+*.swp
+.idea
+npm-debug.log
+node_modules/
