@@ -1,10 +1,8 @@
-.DS_Store
-.project
-.nodemonignore
-.sass-cache
-.bower-*
-*.swp
-.idea
-npm-debug.log
-node_modules/
+node_modules
 dist
+.tmp
+.sass-cache
+bower_components
+test/bower_components
+
+.DS_Store
