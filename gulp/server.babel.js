@@ -1,19 +1,16 @@
-/*jshint esnext: true */
+'use strict';
 
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';import browserSync from 'browser-sync';
-import {
-  stream as wiredep
-}
-from 'wiredep';
+var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var wiredep =require('stream');
 
-const $ = gulpLoadPlugins();
-const reload = browserSync.reload;
+
+var reload = browserSync.reload;
 
 
 
 
-gulp.task('serve', ['styles', 'include', 'fonts'], () => {
+gulp.task('serve', ['styles', 'include', 'fonts'], function() {
   browserSync({
     notify: false,
     port: 9000,
@@ -40,7 +37,7 @@ gulp.task('serve', ['styles', 'include', 'fonts'], () => {
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
-gulp.task('serve:dist', () => {
+gulp.task('serve:dist', function() {
   browserSync({
     notify: false,
     port: 9000,
@@ -50,7 +47,7 @@ gulp.task('serve:dist', () => {
   });
 });
 
-gulp.task('serve:test', () => {
+gulp.task('serve:test', function() {
   browserSync({
     notify: false,
     port: 9000,
@@ -68,7 +65,7 @@ gulp.task('serve:test', () => {
 });
 
 // inject bower components
-gulp.task('wiredep', () => {
+gulp.task('wiredep', function() {
   gulp.src('app/styles/*.scss')
     .pipe(wiredep({
       ignorePath: /^(\.\.\/)+/

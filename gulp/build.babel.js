@@ -1,13 +1,13 @@
-/*jshint esnext: true */
+'use strict';
 
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import del from 'del';
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var del = require('del');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], function() {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

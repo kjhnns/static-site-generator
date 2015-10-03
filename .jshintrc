@@ -1,0 +1,15 @@
+{
+  "strict": true,
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "latedef": false,
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+  "validthis": true,
+  "mocha": true,
+  "globals": {
+    "jquery": true
+  }
+}

@@ -1,15 +1,13 @@
-/*jshint esnext: true */
+'use strict';
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var browserSync = require('browser-sync');
 
-
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync';
-
-const $ = gulpLoadPlugins();
-const reload = browserSync.reload;
+var $ = gulpLoadPlugins();
+var reload = browserSync.reload;
 
 function lint(files, options) {
-  return () => {
+  return function() {
     return gulp.src(files)
       .pipe(reload({stream: true, once: true}))
       .pipe($.eslint(options))
@@ -17,7 +15,7 @@ function lint(files, options) {
       .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
   };
 }
-const testLintOptions = {
+var testLintOptions = {
   env: {
     mocha: true
   }

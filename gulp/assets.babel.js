@@ -1,14 +1,13 @@
-/*jshint esnext: true */
+'use strict';
 
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import del from 'del';
-import browserSync from 'browser-sync';
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var browserSync = require('browser-sync');
 
-const $ = gulpLoadPlugins();
-const reload = browserSync.reload;
+var $ = gulpLoadPlugins();
+var reload = browserSync.reload;
 
-gulp.task('styles', () => {
+gulp.task('styles', function() {
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -24,7 +23,7 @@ gulp.task('styles', () => {
 });
 
 
-gulp.task('include', () => {
+gulp.task('include', function() {
   return gulp.src('app/*.tpl')
     .pipe($.fileInclude())
     .pipe($.rename({
@@ -37,8 +36,8 @@ gulp.task('include', () => {
     .pipe(reload({stream: true}));
 });
 
-gulp.task('html', ['styles', 'include'], () => {
-  const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
+gulp.task('html', ['styles', 'include'], function() {
+  var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
   return gulp.src(['.tmp/*.html'])
     .pipe(assets)
@@ -51,7 +50,7 @@ gulp.task('html', ['styles', 'include'], () => {
 });
 
 
-gulp.task('images', () => {
+gulp.task('images', function() {
   return gulp.src('app/images/**/*')
     .pipe($.if($.if.isFile, $.cache($.imagemin({
       progressive: true,
@@ -67,7 +66,7 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('fonts', () => {
+gulp.task('fonts', function() {
   return gulp.src(require('main-bower-files')({
     filter: '**/*.{eot,svg,ttf,woff,woff2}'
   }).concat('app/fonts/**/*'))
@@ -75,7 +74,7 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('dist/fonts'));
 });
 
-gulp.task('extras', () => {
+gulp.task('extras', function() {
   return gulp.src([
     'app/*.*',
     '!app/*.tpl',
